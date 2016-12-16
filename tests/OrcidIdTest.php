@@ -19,4 +19,9 @@ class OrcidIdTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(['0000-0002-1694-233X'], OrcidId::extract('http://orcid.org/0000-0002-1694-233X'));
     }
+
+    public function testSupportsOrcidsEndingInLowercaseX()
+    {
+        $this->assertEquals(['0000-0002-1694-233X'], OrcidId::extract('0000-0002-1694-233x'));
+    }
 }

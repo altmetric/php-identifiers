@@ -6,9 +6,9 @@ class OrcidId
 {
     public static function extract($str)
     {
-        preg_match_all('/\d{4}-\d{4}-\d{4}-\d{3}[\dX]/', $str, $matches);
+        preg_match_all('/\d{4}-\d{4}-\d{4}-\d{3}[\dX]/i', $str, $matches);
 
-        return array_filter($matches[0], [__CLASS__, 'isValid']);
+        return array_filter(array_map('strtoupper', $matches[0]), [__CLASS__, 'isValid']);
     }
 
     private static function isValid($str)
