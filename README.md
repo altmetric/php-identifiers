@@ -1,4 +1,4 @@
-# Identifiers
+# Identifiers [![Build Status](https://travis-ci.org/altmetric/php-identifiers.svg?branch=master)](https://travis-ci.org/altmetric/php-identifiers)
 
 *This project is currently still in progress.*
 
