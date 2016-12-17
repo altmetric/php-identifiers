@@ -1,7 +1,5 @@
 <?php
-namespace Altmetric;
-
-use Altmetric\Identifiers\OrcidId;
+namespace Altmetric\Identifiers;
 
 class OrcidIdTest extends \PHPUnit_Framework_TestCase
 {

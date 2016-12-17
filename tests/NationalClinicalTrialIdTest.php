@@ -1,7 +1,5 @@
 <?php
-namespace Altmetric;
-
-use Altmetric\Identifiers\NationalClinicalTrialId;
+namespace Altmetric\Identifiers;
 
 class NationalClinicalTrialIdTest extends \PHPUnit_Framework_TestCase
 {
