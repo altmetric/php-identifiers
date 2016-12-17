@@ -11,7 +11,8 @@ of various scholarly identifiers. The supported list is:
 * [Handles](https://en.wikipedia.org/wiki/Handle_System);
 * [ISBNs](https://en.wikipedia.org/wiki/International_Standard_Book_Number);
 * [National Clinical Trial IDs](https://clinicaltrials.gov/);
-* [ORCID identifiers](http://orcid.org/).
+* [ORCID identifiers](http://orcid.org/);
+* [RePEc IDs](https://en.wikipedia.org/wiki/Research_Papers_in_Economics).
 
 ## API Documentation
 
@@ -91,6 +92,17 @@ $orcidIds = OrcidId::extract('orcid.org/0000-0002-0088-0058');
 ```
 
 Return an array of ORCID identifiers from a given string. Will return an empty array if no matches are found.
+
+### `RepecId::extract($str)`
+
+```php
+use Altmetric\Identifiers\RepecId;
+
+$repecIds = RepecId::extract("RePEc:wbk:wbpubs:2266\nRePEc:inn:wpaper:2016-03");
+//=> ['RePEc:wbk:wbpubs:2266', 'RePEc:inn:wpaper:2016-03']
+```
+
+Return an array of RePEc identifiers from a given string. Will return an empty array if no matches are found.
 
 ## License
 
