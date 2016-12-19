@@ -5,7 +5,12 @@ class Urn
 {
     public static function extract($str)
     {
-        preg_match_all('#urn:(?!urn:)[a-z0-9][a-z0-9\-]{1,31}:(?:[a-z0-9()+,-.:=@;$_!*\']|%(?:2[1-9a-f]|[3-6][0-9a-f]|7[0-9a-e]))+#i', $str, $matches);
+        preg_match_all(
+            '/\burn:(?!urn:)[a-z0-9][a-z0-9\-]{1,31}:(?:[a-z0-9()+,-.:=@;$_!*\']|' .
+            '%(?:2[1-9a-f]|[3-6][0-9a-f]|7[0-9a-e]))+\b/i',
+            $str,
+            $matches
+        );
 
         return array_map([__CLASS__, 'normalizeUrn'], $matches[0]);
     }

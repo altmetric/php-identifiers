@@ -37,4 +37,9 @@ class UrnTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(['urn:foo:BAR'], Urn::extract('urn:foo:BAR'));
     }
+
+    public function testDoesOnlyExtractsUrnsWithWordBoundaries()
+    {
+        $this->assertEmpty(Urn::extract('sideburn:mutton:chops'));
+    }
 }
