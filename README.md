@@ -6,8 +6,9 @@ Collection of utilities related to the extraction, validation and normalization
 of various scholarly identifiers. The supported list is:
 
 * [ADS Bibcodes](http://adsdoc.harvard.edu/abs_doc/help_pages/bibcodes.html);
-* [DOIs](https://www.doi.org/)
-* [ISBNs](https://en.wikipedia.org/wiki/International_Standard_Book_Number)
+* [arXiv IDs](https://arxiv.org/help/arxiv_identifier);
+* [DOIs](https://www.doi.org/);
+* [ISBNs](https://en.wikipedia.org/wiki/International_Standard_Book_Number);
 * [National Clinical Trial IDs](https://clinicaltrials.gov/);
 * [ORCID identifiers](http://orcid.org/).
 
@@ -23,6 +24,17 @@ $bibcodes = AdsBibcode::extract('ADS: 1974AJ.....79..819H');
 ```
 
 Return an array of ADS bibcodes from a given string. Will return an empty array if no matches are found.
+
+### `ArxivId::extract($str)`
+
+```php
+use Altmetric\Identifiers\ArxivId;
+
+$arxivIds = ArxivId::extract("math.GT/0309136\narXiv:1501.00001v2");
+//=> ['math.GT/0309136', '1501.00001v2']
+```
+
+Return an array of arXiv IDs from a given string. Will return an empty array if no matches are found.
 
 ### `Doi::extract($str)`
 
