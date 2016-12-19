@@ -5,8 +5,10 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Paul Mucur",
-            "email": "paul@altmetric.com"
+            "name": "Paul Mucur"
+        },
+        {
+            "name": "Maciej Gajewski"
         }
     ],
     "require": {

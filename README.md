@@ -1,9 +1,20 @@
 # Identifiers [![Build Status](https://travis-ci.org/altmetric/php-identifiers.svg?branch=master)](https://travis-ci.org/altmetric/php-identifiers)
 
-*This project is currently still in progress.*
-
 Collection of utilities related to the extraction, validation and normalization
-of various scholarly identifiers. The supported list is:
+of various scholarly identifiers.
+
+**Current version:** 0.1.0  
+**Supported PHP versions:** 5.4, 5.5, 5.6, 7
+
+## Installation
+
+```shell
+$ composer require altmetric/identifiers
+```
+
+## Supported identifiers
+
+The supported list is:
 
 * [ADS Bibcodes](http://adsdoc.harvard.edu/abs_doc/help_pages/bibcodes.html);
 * [arXiv IDs](https://arxiv.org/help/arxiv_identifier);
@@ -18,7 +29,7 @@ of various scholarly identifiers. The supported list is:
 
 ## API Documentation
 
-### `AdsBibcode::extract($str)`
+### `public AdsBibcode::extract(string $str): array`
 
 ```php
 use Altmetric\Identifiers\AdsBibcode;
@@ -29,7 +40,7 @@ $bibcodes = AdsBibcode::extract('ADS: 1974AJ.....79..819H');
 
 Return an array of ADS bibcodes from a given string. Will return an empty array if no matches are found.
 
-### `ArxivId::extract($str)`
+### `public ArxivId::extract(string $str): array`
 
 ```php
 use Altmetric\Identifiers\ArxivId;
@@ -40,7 +51,7 @@ $arxivIds = ArxivId::extract("math.GT/0309136\narXiv:1501.00001v2");
 
 Return an array of arXiv IDs from a given string. Will return an empty array if no matches are found.
 
-### `Doi::extract($str)`
+### `public Doi::extract(string $str): array`
 
 ```php
 use Altmetric\Identifiers\Doi;
@@ -51,7 +62,7 @@ $dois = Doi::extract('doi:10.1049/el.2013.3006')
 
 Return an array of DOIs from a given string. Will return an empty array if no matches are found.
 
-### `Handle::extract($str)`
+### `public Handle::extract(string $str): array`
 
 ```php
 use Altmetric\Identifiers\Handle;
@@ -62,7 +73,7 @@ $handles = Handle::extract('http://hdl.handle.net/10149/596901')
 
 Return an array of Handles from a given string. Will return an empty array if no matches are found.
 
-### `Isbn::extract($str)`
+### `public Isbn::extract(string $str): array`
 
 ```php
 use Altmetric\Identifiers\Isbn;
@@ -73,7 +84,7 @@ $isbns = Isbn::extract("ISBN: 9780805069099\nISBN: 2-7594-0269-X");
 
 Return an array of ISBN-13s from a given string. Will convert ISBN-10s to ISBN-13s automatically and return an empty array if no matches are found.
 
-### `NationalClinicalTrialId::extract($str)`
+### `public NationalClinicalTrialId::extract(string $str): array`
 
 ```php
 use Altmetric\Identifiers\NationalClinicalTrialId;
@@ -84,7 +95,7 @@ $nctIds = NationalClinicalTrialId::extract('Trial ID: NCT00000106');
 
 Return an array of National Clinical Trial IDs from a given string. Will return an empty array if no matches are found.
 
-### `OrcidId::extract($str)`
+### `public OrcidId::extract(string $str): array`
 
 ```php
 use Altmetric\Identifiers\OrcidId;
@@ -95,7 +106,7 @@ $orcidIds = OrcidId::extract('orcid.org/0000-0002-0088-0058');
 
 Return an array of ORCID identifiers from a given string. Will return an empty array if no matches are found.
 
-### `PubmedId::extract($str)`
+### `public PubmedId::extract(string $str): array`
 
 ```php
 use Altmetric\Identifiers\PubmedId;
@@ -105,7 +116,7 @@ $pubmedIds = PubmedId::extract("23193287\n14599470");
 
 Return an array of PubMed IDs from a given string. Will return an empty array if no matches are found.
 
-### `RepecId::extract($str)`
+### `public RepecId::extract(string $str): array`
 
 ```php
 use Altmetric\Identifiers\RepecId;
@@ -116,7 +127,7 @@ $repecIds = RepecId::extract("RePEc:wbk:wbpubs:2266\nRePEc:inn:wpaper:2016-03");
 
 Return an array of RePEc identifiers from a given string. Will return an empty array if no matches are found.
 
-### `Urn::extract($str)`
+### `public Urn::extract(string $str): array`
 
 ```php
 use Altmetric\Identifiers\Urn;
