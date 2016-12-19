@@ -5,12 +5,59 @@ class Isbn
 {
     public static function extract($str)
     {
+        return self::extractIsbn13s($str) + self::extractIsbn10s($str);
+    }
+
+    private static function extractIsbn13s($str)
+    {
         preg_match_all('/\b97[89]\d{10}\b/', str_replace('-', '', $str), $matches);
 
         return array_filter($matches[0], [__CLASS__, 'isValidIsbn13']);
     }
 
+    private static function extractIsbn10s($str)
+    {
+        preg_match_all('/\b\d{9}[\dX]\b/i', str_replace('-', '', $str), $matches);
+
+        return array_map(
+            [__CLASS__, 'convertIsbn10ToIsbn13'],
+            array_filter($matches[0], [__CLASS__, 'isValidIsbn10'])
+        );
+    }
+
     private static function isValidIsbn13($str)
+    {
+        $checkDigit = self::isbn13CheckDigit($str);
+
+        return $checkDigit === (int) $str[12];
+    }
+
+    private static function isValidIsbn10($str)
+    {
+        $sum = $str[0];
+        $sum += $str[1] * 2;
+        $sum += $str[2] * 3;
+        $sum += $str[3] * 4;
+        $sum += $str[4] * 5;
+        $sum += $str[5] * 6;
+        $sum += $str[6] * 7;
+        $sum += $str[7] * 8;
+        $sum += $str[8] * 9;
+        $sum += (strtoupper($str[9]) === 'X' ? 10 : $str[9]) * 10;
+
+        return ($sum % 11) === 0;
+    }
+
+    private static function convertIsbn10ToIsbn13($str)
+    {
+        $isbn13 = '978';
+        $isbn13 .= substr($str, 0, 9);
+        $isbn13 .= self::isbn13CheckDigit($isbn13);
+
+        return $isbn13;
+    }
+
+    private static function isbn13CheckDigit($str)
     {
         $sum = 0;
         $sum += $str[0];
@@ -25,8 +72,8 @@ class Isbn
         $sum += $str[9] * 3;
         $sum += $str[10];
         $sum += $str[11] * 3;
-        $sum += $str[12];
+        $checkDigit = 10 - ($sum % 10);
 
-        return ($sum % 10) === 0;
+        return $checkDigit === 10 ? 0 : $checkDigit;
     }
 }

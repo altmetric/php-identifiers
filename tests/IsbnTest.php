@@ -17,4 +17,19 @@ class IsbnTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEmpty(Isbn::extract('9783319217280'));
     }
+
+    public function testConvertsValidIsbn10sToIsbn13s()
+    {
+        $this->assertEquals(['9780805069099'], Isbn::extract('0-8050-6909-7'));
+    }
+
+    public function testConvertsValidIsbn10sWithXCheckDigitToIsbn13s()
+    {
+        $this->assertEquals(['9782759402694'], Isbn::extract('2-7594-0269-X'));
+    }
+
+    public function testDoesNotExtractInvalidIsbn10s()
+    {
+        $this->assertEmpty(Isbn::extract('0-8050-6909-X'));
+    }
 }
