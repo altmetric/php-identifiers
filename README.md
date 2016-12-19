@@ -138,6 +138,10 @@ $urns = Urn::extract("urn:foo:bar\nURN:FOO:BA%2CZ");
 
 Return an array of URNs from a given string. Will return an empty array if no matches are found.
 
+## Ruby version
+
+We also maintain [a version of this library for Ruby](https://github.com/altmetric/identifiers).
+
 ## License
 
 Copyright © 2016 Altmetric LLP
