@@ -13,7 +13,8 @@ of various scholarly identifiers. The supported list is:
 * [National Clinical Trial IDs](https://clinicaltrials.gov/);
 * [ORCID identifiers](http://orcid.org/);
 * [PubMed IDs](http://www.ncbi.nlm.nih.gov/pubmed);
-* [RePEc IDs](https://en.wikipedia.org/wiki/Research_Papers_in_Economics).
+* [RePEc IDs](https://en.wikipedia.org/wiki/Research_Papers_in_Economics);
+* [URNs](https://en.wikipedia.org/wiki/Uniform_Resource_Name).
 
 ## API Documentation
 
@@ -114,6 +115,17 @@ $repecIds = RepecId::extract("RePEc:wbk:wbpubs:2266\nRePEc:inn:wpaper:2016-03");
 ```
 
 Return an array of RePEc identifiers from a given string. Will return an empty array if no matches are found.
+
+### `Urn::extract($str)`
+
+```php
+use Altmetric\Identifiers\Urn;
+
+$urns = Urn::extract("urn:foo:bar\nURN:FOO:BA%2CZ");
+//=> ['urn:foo:bar', 'urn:foo:BA%2cZ']
+```
+
+Return an array of URNs from a given string. Will return an empty array if no matches are found.
 
 ## License
 
