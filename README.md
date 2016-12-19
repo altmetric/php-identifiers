@@ -8,6 +8,7 @@ of various scholarly identifiers. The supported list is:
 * [ADS Bibcodes](http://adsdoc.harvard.edu/abs_doc/help_pages/bibcodes.html);
 * [arXiv IDs](https://arxiv.org/help/arxiv_identifier);
 * [DOIs](https://www.doi.org/);
+* [Handles](https://en.wikipedia.org/wiki/Handle_System);
 * [ISBNs](https://en.wikipedia.org/wiki/International_Standard_Book_Number);
 * [National Clinical Trial IDs](https://clinicaltrials.gov/);
 * [ORCID identifiers](http://orcid.org/).
@@ -46,6 +47,17 @@ $dois = Doi::extract('doi:10.1049/el.2013.3006')
 ```
 
 Return an array of DOIs from a given string. Will return an empty array if no matches are found.
+
+### `Handle::extract($str)`
+
+```php
+use Altmetric\Identifiers\Handle;
+
+$handles = Handle::extract('http://hdl.handle.net/10149/596901')
+//=> ['10149/596901']
+```
+
+Return an array of Handles from a given string. Will return an empty array if no matches are found.
 
 ### `Isbn::extract($str)`
 
