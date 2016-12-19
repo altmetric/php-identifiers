@@ -12,6 +12,7 @@ of various scholarly identifiers. The supported list is:
 * [ISBNs](https://en.wikipedia.org/wiki/International_Standard_Book_Number);
 * [National Clinical Trial IDs](https://clinicaltrials.gov/);
 * [ORCID identifiers](http://orcid.org/);
+* [PubMed IDs](http://www.ncbi.nlm.nih.gov/pubmed);
 * [RePEc IDs](https://en.wikipedia.org/wiki/Research_Papers_in_Economics).
 
 ## API Documentation
@@ -92,6 +93,16 @@ $orcidIds = OrcidId::extract('orcid.org/0000-0002-0088-0058');
 ```
 
 Return an array of ORCID identifiers from a given string. Will return an empty array if no matches are found.
+
+### `PubmedId::extract($str)`
+
+```php
+use Altmetric\Identifiers\PubmedId;
+
+$pubmedIds = PubmedId::extract("23193287\n14599470");
+```
+
+Return an array of PubMed IDs from a given string. Will return an empty array if no matches are found.
 
 ### `RepecId::extract($str)`
 
