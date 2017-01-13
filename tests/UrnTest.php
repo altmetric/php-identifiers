@@ -42,4 +42,9 @@ class UrnTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEmpty(Urn::extract('sideburn:mutton:chops'));
     }
+
+    public function testAllowDotAtTheEndOfNamespaceSpecificString()
+    {
+        $this->assertEquals(['urn:mutton:chops.'], Urn::extract('urn:mutton:chops.'));
+    }
 }
