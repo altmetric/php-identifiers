@@ -144,6 +144,6 @@ We also maintain [a version of this library for Ruby](https://github.com/altmetr
 
 ## License
 
-Copyright © 2016 Altmetric LLP
+Copyright © 2016-2017 Altmetric LLP
 
 Distributed under the [MIT License](http://opensource.org/licenses/MIT).
