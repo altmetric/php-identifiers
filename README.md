@@ -25,7 +25,8 @@ The supported list is:
 * [ORCID identifiers](http://orcid.org/);
 * [PubMed IDs](http://www.ncbi.nlm.nih.gov/pubmed);
 * [RePEc IDs](https://en.wikipedia.org/wiki/Research_Papers_in_Economics);
-* [URNs](https://en.wikipedia.org/wiki/Uniform_Resource_Name).
+* [URNs](https://en.wikipedia.org/wiki/Uniform_Resource_Name);
+* [URIs](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier).
 
 ## API Documentation
 
@@ -138,9 +139,24 @@ $urns = Urn::extract("urn:foo:bar\nURN:FOO:BA%2CZ");
 
 Return an array of URNs from a given string. Will return an empty array if no matches are found.
 
+### `public Uri::extract(string $str): array`
+
+```php
+use Altmetric\Identifiers\Uri;
+
+$uris = Uri::extract("http://www.altmetric.com:80/foo?bar#1");
+//=> ['http://www.altmetric.com:80/foo?bar#1']
+```
+
+Return an array of URIs from a given string. Will return an empty array if no matches are found.
+
 ## Ruby version
 
 We also maintain [a version of this library for Ruby](https://github.com/altmetric/identifiers).
+
+## Acknowledgements
+
+* Thanks to Jeff Roberson's ["Regular Expression URI Validation"](http://jmrware.com/articles/2009/uri_regexp/URI_regex.html)
 
 ## License
 
