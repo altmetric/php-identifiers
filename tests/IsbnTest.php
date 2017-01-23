@@ -13,6 +13,26 @@ class IsbnTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['9780805069099'], Isbn::extract('978-0-80-506909-9'));
     }
 
+    public function testExtractsIsbn13sWithSpaces()
+    {
+        $this->assertEquals(['9780805069099'], Isbn::extract('978 0 80 506909 9'));
+    }
+
+    public function testExtractsIsbn13sPrecededByText()
+    {
+        $this->assertEquals(['9780805069099'], Isbn::extract('I like 978 0 80 506909 9'));
+    }
+
+    public function testExtractsIsbn13sSucceededByText()
+    {
+        $this->assertEquals(['9780805069099'], Isbn::extract('978 0 80 506909 9 is great'));
+    }
+
+    public function testExtractsIsbn13sOnNewLines()
+    {
+        $this->assertEquals(['9780805069099', '9780671879198'], Isbn::extract("978-0-80-506909-9\n978-0-67-187919-8"));
+    }
+
     public function testDoesNotExtractInvalidIsbn13s()
     {
         $this->assertEmpty(Isbn::extract('9783319217280'));
@@ -21,6 +41,16 @@ class IsbnTest extends \PHPUnit_Framework_TestCase
     public function testConvertsValidIsbn10sToIsbn13s()
     {
         $this->assertEquals(['9780805069099'], Isbn::extract('0-8050-6909-7'));
+    }
+
+    public function testConvertsValidIsbn10sWithSpacesToIsbn13s()
+    {
+        $this->assertEquals(['9780805069099'], Isbn::extract('0 8050 6909 7'));
+    }
+
+    public function testConvertsValidIsbn10sWithSpacesAndXToIsbn13s()
+    {
+        $this->assertEquals(['9780805069952'], Isbn::extract('0 8050 6995 X'));
     }
 
     public function testConvertsValidIsbn10sWithXCheckDigitToIsbn13s()
