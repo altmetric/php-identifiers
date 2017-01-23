@@ -10,14 +10,14 @@ class Isbn
 
     private static function extractIsbn13s($str)
     {
-        preg_match_all('/\b97[89]\d{10}\b/', str_replace('-', '', $str), $matches);
+        preg_match_all('/\b97[89]\d{10}\b/', preg_replace('/(?<=\d)[- ](?=\d)/', '', $str), $matches);
 
         return array_filter($matches[0], [__CLASS__, 'isValidIsbn13']);
     }
 
     private static function extractIsbn10s($str)
     {
-        preg_match_all('/\b\d{9}[\dX]\b/i', str_replace('-', '', $str), $matches);
+        preg_match_all('/\b\d{9}[\dX]\b/i', preg_replace('/(?<=\d)[- ](?=[\dX])/i', '', $str), $matches);
 
         return array_map(
             [__CLASS__, 'convertIsbn10ToIsbn13'],
