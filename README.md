@@ -3,7 +3,7 @@
 Collection of utilities related to the extraction, validation and normalization
 of various scholarly identifiers.
 
-**Current version:** 0.1.1  
+**Current version:** 0.2.0  
 **Supported PHP versions:** 5.4, 5.5, 5.6, 7
 
 ## Installation
