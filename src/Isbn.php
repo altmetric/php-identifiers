@@ -5,7 +5,19 @@ class Isbn
 {
     public static function extract($str)
     {
-        return self::extractIsbn13s($str) + self::extractIsbn10s($str);
+        return self::extractIsbnAs($str) + self::extractIsbn13s($str) + self::extractIsbn10s($str);
+    }
+
+    private static function extractIsbnAs($str)
+    {
+        preg_match_all('#(?<=10\.)97[89]\.\d{2,8}/\d{1,7}\b#', $str, $matches);
+
+        return self::extractIsbn13s(
+            implode(
+                PHP_EOL,
+                array_map([__CLASS__, 'convertIsbnAToIsbn13'], $matches[0])
+            )
+        );
     }
 
     private static function extractIsbn13s($str)
@@ -23,6 +35,11 @@ class Isbn
             [__CLASS__, 'convertIsbn10ToIsbn13'],
             array_filter($matches[0], [__CLASS__, 'isValidIsbn10'])
         );
+    }
+
+    private static function convertIsbnAToIsbn13($str)
+    {
+        return str_replace(['.', '/'], '', $str);
     }
 
     private static function isValidIsbn13($str)

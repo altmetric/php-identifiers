@@ -18,7 +18,7 @@ The supported list is:
 
 * [ADS Bibcodes](http://adsdoc.harvard.edu/abs_doc/help_pages/bibcodes.html);
 * [arXiv IDs](https://arxiv.org/help/arxiv_identifier);
-* [DOIs](https://www.doi.org/);
+* [DOIs](https://www.doi.org/) (including [ISBN-As](https://www.doi.org/factsheets/ISBN-A.html));
 * [Handles](https://en.wikipedia.org/wiki/Handle_System);
 * [ISBNs](https://en.wikipedia.org/wiki/International_Standard_Book_Number);
 * [National Clinical Trial IDs](https://clinicaltrials.gov/);
@@ -61,7 +61,7 @@ $dois = Doi::extract('doi:10.1049/el.2013.3006')
 //=> ['10.1049/el.2013.3006']
 ```
 
-Return an array of DOIs from a given string. Will return an empty array if no matches are found.
+Return an array of DOIs (including [ISBN-As](https://www.doi.org/factsheets/ISBN-A.html)) from a given string. Will return an empty array if no matches are found.
 
 ### `public Handle::extract(string $str): array`
 
@@ -83,7 +83,7 @@ $isbns = Isbn::extract("ISBN: 9780805069099\nISBN: 2-7594-0269-X");
 //=> ['9780805069099', '9782759402694']
 ```
 
-Return an array of ISBN-13s from a given string. Will convert ISBN-10s to ISBN-13s automatically and return an empty array if no matches are found.
+Return an array of ISBN-13s from a given string. Will convert ISBN-As and ISBN-10s to ISBN-13s automatically and return an empty array if no matches are found.
 
 ### `public NationalClinicalTrialId::extract(string $str): array`
 

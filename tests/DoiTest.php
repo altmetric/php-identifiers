@@ -8,6 +8,16 @@ class DoiTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['10.1049/el.2013.3006'], Doi::extract('This is an example of DOI: 10.1049/el.2013.3006'));
     }
 
+    public function testExtractsIsbnAs()
+    {
+        $this->assertEquals(['10.978.8898392/315'], Doi::extract('http://dx.doi.org/10.978.8898392/315'));
+    }
+
+    public function testDoesNotExtractsInvalidIsbnAs()
+    {
+        $this->assertEmpty(Doi::extract('http://dx.doi.org/10.978.8898392/NotARealIsbnA'));
+    }
+
     public function testLowercasesDois()
     {
         $this->assertEquals(['10.1097/01.asw.0000443266.17665.19'], Doi::extract('10.1097/01.ASW.0000443266.17665.19'));
