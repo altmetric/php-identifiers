@@ -83,7 +83,7 @@ $isbns = Isbn::extract("ISBN: 9780805069099\nISBN: 2-7594-0269-X");
 //=> ['9780805069099', '9782759402694']
 ```
 
-Return an array of ISBN-13s from a given string. Will convert ISBN-10s to ISBN-13s automatically and return an empty array if no matches are found.
+Return an array of ISBN-13s from a given string. Will convert ISBN-As and ISBN-10s to ISBN-13s automatically and return an empty array if no matches are found.
 
 ### `public NationalClinicalTrialId::extract(string $str): array`
 

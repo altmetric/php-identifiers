@@ -62,4 +62,14 @@ class IsbnTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEmpty(Isbn::extract('0-8050-6909-X'));
     }
+
+    public function testExtractsIsbnAsFromDois()
+    {
+        $this->assertEquals(['9788898392315'], Isbn::extract('http://dx.doi.org/10.978.8898392/315'));
+    }
+
+    public function testDoesNotExtractInvalidIsbnAsFromDois()
+    {
+        $this->assertEmpty(Isbn::extract('http://dx.doi.org/10.978.8898392/316'));
+    }
 }
