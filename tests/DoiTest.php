@@ -43,6 +43,11 @@ class DoiTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['10.1130/2013.2502'], Doi::extract('This is an example of a DOI: 10.1130/2013.2502...",'));
     }
 
+    public function testDiscardsTrailingUnicodePunctuation()
+    {
+        $this->assertEquals(['10.1130/2013.2502'], Doi::extract('This is an example of a DOI: 10.1130/2013.2502…'));
+    }
+
     public function testRetainsClosingParenthesesThatArePartOfTheDoi()
     {
         $this->assertEquals(['10.1130/2013.2502(04)'], Doi::extract('This is an example of a DOI: 10.1130/2013.2502(04)'));

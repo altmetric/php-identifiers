@@ -19,17 +19,19 @@ class Doi
         /       # Prefix/suffix divider
         \S+     # DOI suffix
     )
-}x
+}xu
 EOT;
-    const VALID_TRAILING_PUNCTUATION = <<<'EOT'
+    const VALID_ENDING = <<<'EOT'
 /
     (?:
-        \(.+\) # Balanced parentheses
+        \p{^P}  # Non-punctuation character
         |
-        2-\#   # Early Wiley DOI suffix
+        \(.+\)  # Balanced parentheses
+        |
+        2-\#    # Early Wiley DOI suffix
     )
     $
-/x
+/xu
 EOT;
 
     public static function extract($str)
@@ -41,10 +43,10 @@ EOT;
 
     private static function stripTrailingPunctuation($doi)
     {
-        if (!preg_match('/[[:punct:]]$/', $doi) || preg_match(self::VALID_TRAILING_PUNCTUATION, $doi)) {
+        if (preg_match(self::VALID_ENDING, $doi)) {
             return $doi;
         }
 
-        return preg_replace('/[[:punct:]]+$/', '', $doi);
+        return preg_replace('/\p{P}+$/u', '', $doi);
     }
 }
