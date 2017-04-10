@@ -47,6 +47,6 @@ EOT;
             return $doi;
         }
 
-        return preg_replace('/\p{P}+$/u', '', $doi);
+        return self::stripTrailingPunctuation(preg_replace('/\p{P}$/u', '', $doi));
     }
 }
