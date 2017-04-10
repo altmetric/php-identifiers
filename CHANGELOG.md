@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.5.0] - 2017-04-10
+## Added
+- Support for ISBNs with digits separated by Unicode whitespace and dashes
+- Improved extraction of RePEc IDs from Unicode strings
+- Improved extraction of NCT IDs from Unicode strings
+- Improved extraction of PubMed IDs from Unicode strings
+- Improved extraction of Handle IDs from Unicode strings
+- Improved extraction of ADS Bibcodes from Unicode strings
+- Support for valid DOIs ending in punctuation
+
 ## [0.4.0] - 2017-01-27
 ## Added
 - Support for ISBN-As when extracting DOIs and ISBNs
@@ -27,3 +37,4 @@ project adheres to [Semantic Versioning](http://semver.org/).
 [0.2.0]: https://github.com/altmetric/php-identifiers/releases/tag/v0.2.0
 [0.3.0]: https://github.com/altmetric/php-identifiers/releases/tag/v0.3.0
 [0.4.0]: https://github.com/altmetric/php-identifiers/releases/tag/v0.4.0
+[0.5.0]: https://github.com/altmetric/php-identifiers/releases/tag/v0.5.0
