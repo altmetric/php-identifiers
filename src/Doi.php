@@ -36,14 +36,14 @@ EOT;
 
     public static function extract($str)
     {
-        preg_match_all(self::PATTERN, strtolower($str), $matches);
+        preg_match_all(self::PATTERN, mb_strtolower($str, 'UTF-8'), $matches);
 
         return array_filter(array_map([__CLASS__, 'stripTrailingPunctuation'], $matches[0]));
     }
 
     public static function extractOne($str)
     {
-        preg_match(self::PATTERN, strtolower($str), $matches);
+        preg_match(self::PATTERN, mb_strtolower($str, 'UTF-8'), $matches);
         if (empty($matches)) {
             return;
         }
