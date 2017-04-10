@@ -5,7 +5,7 @@ class RepecId
 {
     public static function extract($str)
     {
-        preg_match_all('/\brepec:\S+\b/i', $str, $matches);
+        preg_match_all('/\brepec:\S+\b/ui', $str, $matches);
 
         return array_map(
             function ($repecId) {
