@@ -62,7 +62,7 @@ class DoiTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(
             ['10.1002/(sici)1096-8644(199601)99:1<135::aid-ajpa8>3.0.co;2-#'],
-            Doi::extract('This is an example of an exotic DOI: 10.1002/(SICI)1096-8644(199601)99:1<135::AID-AJPA8>3.0.CO;2-#')
+            Doi::extract('This is an example of an old Wiley DOI: 10.1002/(SICI)1096-8644(199601)99:1<135::AID-AJPA8>3.0.CO;2-#')
         );
     }
 
@@ -70,7 +70,7 @@ class DoiTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(
             ['10.1002/(sici)1096-8644(199601)99:1<135::aid-ajpa8>3.0.co;2-#'],
-            Doi::extract('This is an example of an exotic DOI: 10.1002/(SICI)1096-8644(199601)99:1<135::AID-AJPA8>3.0.CO;2-#",')
+            Doi::extract('This is an example of an old Wiley DOI: 10.1002/(SICI)1096-8644(199601)99:1<135::AID-AJPA8>3.0.CO;2-#",')
         );
     }
 
@@ -104,5 +104,10 @@ class DoiTest extends \PHPUnit_Framework_TestCase
             ['10.1130/2013.2502'],
             Doi::extract('(This is an example of a DOI: 10.1130/2013.2502).",')
         );
+    }
+
+    public function testDoesNotExtractDoisWithPurelyPunctuationSuffixes()
+    {
+        $this->assertEmpty(Doi::extract('10.1130/!).",'));
     }
 }

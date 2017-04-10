@@ -38,7 +38,17 @@ EOT;
     {
         preg_match_all(self::PATTERN, strtolower($str), $matches);
 
-        return array_map([__CLASS__, 'stripTrailingPunctuation'], $matches[0]);
+        return array_filter(array_map([__CLASS__, 'stripTrailingPunctuation'], $matches[0]));
+    }
+
+    public static function extractOne($str)
+    {
+        preg_match(self::PATTERN, strtolower($str), $matches);
+        if (empty($matches)) {
+            return;
+        }
+
+        return self::stripTrailingPunctuation($matches[0]);
     }
 
     private static function stripTrailingPunctuation($doi)
@@ -47,6 +57,6 @@ EOT;
             return $doi;
         }
 
-        return self::stripTrailingPunctuation(preg_replace('/\p{P}$/u', '', $doi));
+        return self::extractOne(preg_replace('/\p{P}$/u', '', $doi));
     }
 }
