@@ -18,4 +18,9 @@ class RepecIdTest extends \PHPUnit_Framework_TestCase
             RepecId::extract("REPEC:wbk:wbpubs:2266\nrepec:inn:wpaper:2016-03")
         );
     }
+
+    public function testExtractsRepecIdsEndingInUnicodeWhitespace()
+    {
+        $this->assertEquals(['RePEc:wbk:wbpubs:2266'], RepecId::extract('RePEc:wbk:wbpubs:2266 '));
+    }
 }

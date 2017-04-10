@@ -8,6 +8,11 @@ class NationalClinicalTrialIdTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['NCT00000106', 'NCT00000107'], NationalClinicalTrialId::extract("NCT00000106\nNCT00000107"));
     }
 
+    public function testExtractsNctIdsWithTrailingUnicodePunctuation()
+    {
+        $this->assertEquals(['NCT00000106'], NationalClinicalTrialId::extract('NCT00000106…'));
+    }
+
     public function testReturnsEmptyArrayForNoMatches()
     {
         $this->assertEmpty(NationalClinicalTrialId::extract('foobar'));

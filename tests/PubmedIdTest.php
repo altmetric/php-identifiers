@@ -22,4 +22,9 @@ class PubmedIdTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEmpty(PubmedId::extract('00000000'));
     }
+
+    public function testExtractsPubmedIdsWithTrailingUnicodeWhitespace()
+    {
+        $this->assertEquals(['123'], PubmedId::extract('123 '));
+    }
 }

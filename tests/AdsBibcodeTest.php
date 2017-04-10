@@ -17,4 +17,9 @@ class AdsBibcodeTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEmpty(AdsBibcode::extract('10.1097/01.ASW.0000443266.17665.19'));
     }
+
+    public function testExtractsBibcodesWithTrailingUnicodePunctuation()
+    {
+        $this->assertEquals(['2004PhRvL..93o0801M'], AdsBibcode::extract('2004PhRvL..93o0801M…'));
+    }
 }
