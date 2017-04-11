@@ -110,4 +110,12 @@ class DoiTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEmpty(Doi::extract('10.1130/!).",'));
     }
+
+    public function testExtractsDoisSeparatedByUnicodeWhitespace()
+    {
+        $this->assertEquals(
+            ['10.1234/foo', '10.1234/bar'],
+            Doi::extract('10.1234/foo 10.1234/bar')
+        );
+    }
 }
