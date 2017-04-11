@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.5.1] - 2017-04-11
+## Fixed
+- Use multibyte-aware string functions to avoid mangling DOIs in Unicode strings
+
 ## [0.5.0] - 2017-04-10
 ## Added
 - Support for ISBNs with digits separated by Unicode whitespace and dashes
@@ -38,3 +42,4 @@ project adheres to [Semantic Versioning](http://semver.org/).
 [0.3.0]: https://github.com/altmetric/php-identifiers/releases/tag/v0.3.0
 [0.4.0]: https://github.com/altmetric/php-identifiers/releases/tag/v0.4.0
 [0.5.0]: https://github.com/altmetric/php-identifiers/releases/tag/v0.5.0
+[0.5.1]: https://github.com/altmetric/php-identifiers/releases/tag/v0.5.1
