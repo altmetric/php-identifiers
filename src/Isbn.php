@@ -3,6 +3,41 @@ namespace Altmetric\Identifiers;
 
 class Isbn
 {
+    const THIRTEEN_PATTERN = <<<'EOT'
+{
+    \b
+    97[89]              # ISBN (GS1) Bookland prefix
+    [\p{Pd}\p{Zs}]?     # Optional hyphenation
+    (?:
+        \d              # Digit
+        [\p{Pd}\p{Zs}]? # Optional hyphenation
+    ){9}
+    \d                  # Check digit
+    \b
+}xu
+EOT;
+    const TEN_PATTERN = <<<'EOT'
+{
+    \b
+    (?:
+        \d              # Digit
+        [\p{Pd}\p{Zs}]? # Optional hyphenation
+    ){9}
+    [\dX]               # Check digit
+    \b
+}xu
+EOT;
+    const ISBN_A_PATTERN = <<<'EOT'
+{
+    (?<=10\.)   # Directory indicator (always 10)
+    97[89]\.    # ISBN (GS1) Bookland prefix
+    \d{2,8}     # ISBN registration group element and publisher prefix
+    /           # Prefix/suffix divider
+    \d{1,7}     # ISBN title enumerator and check digit
+    \b
+}xu
+EOT;
+
     public static function extract($str)
     {
         return self::extractIsbnAs($str) + self::extractIsbn13s($str) + self::extractIsbn10s($str);
@@ -10,7 +45,7 @@ class Isbn
 
     private static function extractIsbnAs($str)
     {
-        preg_match_all('#(?<=10\.)97[89]\.\d{2,8}/\d{1,7}\b#u', $str, $matches);
+        preg_match_all(self::ISBN_A_PATTERN, $str, $matches);
 
         return self::extractIsbn13s(
             implode(
@@ -22,24 +57,35 @@ class Isbn
 
     private static function extractIsbn13s($str)
     {
-        preg_match_all('/\b97[89]\d{10}\b/u', preg_replace('/(?<=\d)[\p{Pd}\p{Zs}](?=\d)/u', '', $str), $matches);
+        preg_match_all(self::THIRTEEN_PATTERN, $str, $matches);
 
-        return array_filter($matches[0], [__CLASS__, 'isValidIsbn13']);
+        return array_filter(
+            array_map([__CLASS__, 'stripHyphenation'], $matches[0]),
+            [__CLASS__, 'isValidIsbn13']
+        );
     }
 
     private static function extractIsbn10s($str)
     {
-        preg_match_all('/\b\d{9}[\dX]\b/ui', preg_replace('/(?<=\d)[\p{Pd}\p{Zs}](?=[\dX])/ui', '', $str), $matches);
+        preg_match_all(self::TEN_PATTERN, $str, $matches);
 
         return array_map(
             [__CLASS__, 'convertIsbn10ToIsbn13'],
-            array_filter($matches[0], [__CLASS__, 'isValidIsbn10'])
+            array_filter(
+                array_map([__CLASS__, 'stripHyphenation'], $matches[0]),
+                [__CLASS__, 'isValidIsbn10']
+            )
         );
     }
 
     private static function convertIsbnAToIsbn13($str)
     {
         return str_replace(['.', '/'], '', $str);
+    }
+
+    private static function stripHyphenation($str)
+    {
+        return preg_replace('/[\p{Pd}\p{Zs}]/u', '', $str);
     }
 
     private static function isValidIsbn13($str)
