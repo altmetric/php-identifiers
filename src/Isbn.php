@@ -3,7 +3,7 @@ namespace Altmetric\Identifiers;
 
 class Isbn
 {
-    const THIRTEEN_PATTERN = <<<'EOT'
+    const ISBN_13_REGEXP = <<<'EOT'
 {
     \b
     97[89]              # ISBN (GS1) Bookland prefix
@@ -16,7 +16,7 @@ class Isbn
     \b
 }xu
 EOT;
-    const TEN_PATTERN = <<<'EOT'
+    const ISBN_10_REGEXP = <<<'EOT'
 {
     \b
     (?:
@@ -27,7 +27,7 @@ EOT;
     \b
 }xu
 EOT;
-    const ISBN_A_PATTERN = <<<'EOT'
+    const ISBN_A_REGEXP = <<<'EOT'
 {
     (?<=10\.)   # Directory indicator (always 10)
     97[89]\.    # ISBN (GS1) Bookland prefix
@@ -45,7 +45,7 @@ EOT;
 
     private static function extractIsbnAs($str)
     {
-        preg_match_all(self::ISBN_A_PATTERN, $str, $matches);
+        preg_match_all(self::ISBN_A_REGEXP, $str, $matches);
 
         return self::extractIsbn13s(
             implode(
@@ -57,7 +57,7 @@ EOT;
 
     private static function extractIsbn13s($str)
     {
-        preg_match_all(self::THIRTEEN_PATTERN, $str, $matches);
+        preg_match_all(self::ISBN_13_REGEXP, $str, $matches);
 
         return array_filter(
             array_map([__CLASS__, 'stripHyphenation'], $matches[0]),
@@ -67,7 +67,7 @@ EOT;
 
     private static function extractIsbn10s($str)
     {
-        preg_match_all(self::TEN_PATTERN, $str, $matches);
+        preg_match_all(self::ISBN_10_REGEXP, $str, $matches);
 
         return array_map(
             [__CLASS__, 'convertIsbn10ToIsbn13'],

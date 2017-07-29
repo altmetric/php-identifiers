@@ -8,7 +8,7 @@ class Uri
      * Thanks to Jeff Roberson's "Regular Expression URI Validation",
      * http://jmrware.com/articles/2009/uri_regexp/URI_regex.html#uri-40
      */
-    const PATTERN = <<<'EOF'
+    const REGEXP = <<<'EOF'
 #
     (
         [A-Za-z][A-Za-z0-9+\-.]* :
@@ -54,7 +54,7 @@ EOF;
 
     public static function extract($str)
     {
-        preg_match_all(self::PATTERN, $str, $matches);
+        preg_match_all(self::REGEXP, $str, $matches);
 
         return $matches[0];
     }
