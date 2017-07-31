@@ -8,6 +8,11 @@ class IsbnTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['9780805069099', '9780671879198'], Isbn::extract("ISBN: 9780805069099\nISBN: 9780671879198"));
     }
 
+    public function testExtractsIsbn13sSeparatedByASpace()
+    {
+        $this->assertEquals(['9780805069099', '9780671879198'], Isbn::extract('9780805069099 9780671879198'));
+    }
+
     public function testExtractsIsbn13sWithDashes()
     {
         $this->assertEquals(['9780805069099'], Isbn::extract('978-0-80-506909-9'));
@@ -41,6 +46,11 @@ class IsbnTest extends \PHPUnit_Framework_TestCase
     public function testExtractsIsbn13sOnNewLines()
     {
         $this->assertEquals(['9780805069099', '9780671879198'], Isbn::extract("978-0-80-506909-9\n978-0-67-187919-8"));
+    }
+
+    public function testExtractsHyphenatedIsbn13sSeparatedByASpace()
+    {
+        $this->assertEquals(['9780805069099', '9780671879198'], Isbn::extract("978-0-80-506909-9 978-0-67-187919-8"));
     }
 
     public function testExtractsIsbn13sSeparatedByUnicodeWhitespace()

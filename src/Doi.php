@@ -3,7 +3,7 @@ namespace Altmetric\Identifiers;
 
 class Doi
 {
-    const PATTERN = <<<'EOT'
+    const REGEXP = <<<'EOT'
 {
     10 # Directory indicator (always 10)
     \.
@@ -36,14 +36,14 @@ EOT;
 
     public static function extract($str)
     {
-        preg_match_all(self::PATTERN, mb_strtolower($str, 'UTF-8'), $matches);
+        preg_match_all(self::REGEXP, mb_strtolower($str, 'UTF-8'), $matches);
 
         return array_filter(array_map([__CLASS__, 'stripTrailingPunctuation'], $matches[0]));
     }
 
     public static function extractOne($str)
     {
-        preg_match(self::PATTERN, mb_strtolower($str, 'UTF-8'), $matches);
+        preg_match(self::REGEXP, mb_strtolower($str, 'UTF-8'), $matches);
         if (empty($matches)) {
             return;
         }

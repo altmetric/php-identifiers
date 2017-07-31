@@ -3,7 +3,7 @@ namespace Altmetric\Identifiers;
 
 class ArxivId
 {
-    const POST_2007_PATTERN = <<<'EOT'
+    const POST_2007_REGEXP = <<<'EOT'
 {
     (?<=^|\s|/) # Look-behind for the start of the string, whitespace or a forward slash
     (?:arXiv:)? # Optional arXiv scheme
@@ -14,7 +14,7 @@ class ArxivId
     (?=$|\s)    # Look-ahead for end of string or whitespace
 }xiu
 EOT;
-    const PRE_2007_PATTERN = <<<'EOT'
+    const PRE_2007_REGEXP = <<<'EOT'
 {
     (?<=^|\s|/)       # Look-behind for the start of the string, whitespace or a forward slash
     (?:arXiv:)?       # Optional arXiv scheme
@@ -36,14 +36,14 @@ EOT;
 
     private static function extractPost2007ArxivIds($str)
     {
-        preg_match_all(self::POST_2007_PATTERN, $str, $matches);
+        preg_match_all(self::POST_2007_REGEXP, $str, $matches);
 
         return array_map([__CLASS__, 'stripArxivScheme'], $matches[0]);
     }
 
     private static function extractPre2007ArxivIds($str)
     {
-        preg_match_all(self::PRE_2007_PATTERN, $str, $matches);
+        preg_match_all(self::PRE_2007_REGEXP, $str, $matches);
 
         return array_map([__CLASS__, 'stripArxivScheme'], $matches[0]);
     }
