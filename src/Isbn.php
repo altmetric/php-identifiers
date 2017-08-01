@@ -18,6 +18,10 @@ class Isbn
 EOT;
     const ISBN_10_REGEXP = <<<'EOT'
 {
+    (?<!                # Don't match a hyphenated or spaced ISBN-13
+        97[89]
+        [\p{Pd}\p{Zs}]
+    )
     \b
     (?:
         \d              # Digit
