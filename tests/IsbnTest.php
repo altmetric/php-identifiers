@@ -117,4 +117,19 @@ class IsbnTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEmpty(Isbn::extract('http://dx.doi.org/10.978.8898392/316'));
     }
+
+    public function testDoesNotDeduplicateIsbns()
+    {
+        $this->assertEquals(['9780309570794', '9780309570794'], Isbn::extract('0309570794 9780309570794'));
+    }
+
+    public function testDoesNotExtractIsbn10sFromHyphenatedIsbn13s()
+    {
+        $this->assertEquals(['9780309570794'], Isbn::extract('978-0-309-57079-4'));
+    }
+
+    public function testDoesNotExtractIsbn10sFromSpaceSeparatedIsbn13s()
+    {
+        $this->assertEquals(['9780309570794'], Isbn::extract('978 0 309 57079 4'));
+    }
 }
