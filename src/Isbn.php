@@ -40,7 +40,7 @@ EOT;
 
     public static function extract($str)
     {
-        return self::extractIsbnAs($str) + self::extractIsbn13s($str) + self::extractIsbn10s($str);
+        return array_merge(self::extractIsbnAs($str), self::extractIsbn13s($str), self::extractIsbn10s($str));
     }
 
     private static function extractIsbnAs($str)

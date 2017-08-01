@@ -31,7 +31,7 @@ EOT;
 
     public static function extract($str)
     {
-        return self::extractPre2007ArxivIds($str) + self::extractPost2007ArxivIds($str);
+        return array_merge(self::extractPre2007ArxivIds($str), self::extractPost2007ArxivIds($str));
     }
 
     private static function extractPost2007ArxivIds($str)
