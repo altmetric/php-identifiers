@@ -14,6 +14,10 @@ class PubmedId
         ncbi\.nlm\.nih\.gov/pubmed/     # PubMed record page
         |
         ncbi\.nlm\.nih\.gov/m/pubmed/   # Mobile PubMed record page
+        |
+        pmid:                           # URI with pmid scheme
+        |
+        info:pmid/                      # URI with PubMed info scheme
     )
     0*          # Zero padding
     (?!0)(\d+)  # Number (not starting with zero)

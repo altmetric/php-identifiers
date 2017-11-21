@@ -62,4 +62,24 @@ class PubmedIdTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(['123'], PubmedId::extract('https://www.ncbi.nlm.nih.gov/pubmed/000123'));
     }
+
+    public function testExtractsPubmedIdsWithPmidScheme()
+    {
+        $this->assertEquals(['123'], PubmedId::extract('pmid:123'));
+    }
+
+    public function testStripsLeadingZeroesFromPmidScheme()
+    {
+        $this->assertEquals(['123'], PubmedId::extract('pmid:000123'));
+    }
+
+    public function testExtractsPubmedIdsWithInfoPmidScheme()
+    {
+        $this->assertEquals(['123'], PubmedId::extract('info:pmid/123'));
+    }
+
+    public function testStripsLeadingZeroesFromInfoPmidScheme()
+    {
+        $this->assertEquals(['123'], PubmedId::extract('info:pmid/000123'));
+    }
 }
