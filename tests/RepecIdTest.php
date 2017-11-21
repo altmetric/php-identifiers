@@ -23,4 +23,9 @@ class RepecIdTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(['RePEc:wbk:wbpubs:2266'], RepecId::extract('RePEc:wbk:wbpubs:2266 '));
     }
+
+    public function testReturnsEmptyArrayWhenGivenNull()
+    {
+        $this->assertEmpty(RepecId::extract(null));
+    }
 }

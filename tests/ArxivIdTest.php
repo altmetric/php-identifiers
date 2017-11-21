@@ -42,4 +42,9 @@ class ArxivIdTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(['math/0309136'], ArxivId::extract('https://arxiv.org/abs/math/0309136'));
     }
+
+    public function testReturnsEmptyArrayWhenGivenNull()
+    {
+        $this->assertEmpty(ArxivId::extract(null));
+    }
 }

@@ -118,4 +118,9 @@ class DoiTest extends \PHPUnit_Framework_TestCase
             Doi::extract('10.1234/foo 10.1234/bar')
         );
     }
+
+    public function testReturnsEmptyArrayWhenGivenNull()
+    {
+        $this->assertEmpty(Doi::extract(null));
+    }
 }

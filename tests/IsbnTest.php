@@ -132,4 +132,9 @@ class IsbnTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(['9780309570794'], Isbn::extract('978 0 309 57079 4'));
     }
+
+    public function testReturnsEmptyArrayWhenGivenNull()
+    {
+        $this->assertEmpty(Isbn::extract(null));
+    }
 }

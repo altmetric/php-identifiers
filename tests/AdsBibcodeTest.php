@@ -22,4 +22,9 @@ class AdsBibcodeTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(['2004PhRvL..93o0801M'], AdsBibcode::extract('2004PhRvL..93o0801M…'));
     }
+
+    public function testReturnsEmptyArrayWhenGivenNull()
+    {
+        $this->assertEmpty(AdsBibcode::extract(null));
+    }
 }

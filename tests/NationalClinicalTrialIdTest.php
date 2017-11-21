@@ -22,4 +22,9 @@ class NationalClinicalTrialIdTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(['NCT00000106', 'NCT00000107'], NationalClinicalTrialId::extract("nct00000106\nnCt00000107"));
     }
+
+    public function testReturnsEmptyArrayWhenGivenNull()
+    {
+        $this->assertEmpty(NationalClinicalTrialId::extract(null));
+    }
 }

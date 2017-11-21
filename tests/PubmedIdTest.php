@@ -27,4 +27,9 @@ class PubmedIdTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(['123'], PubmedId::extract('123 '));
     }
+
+    public function testReturnsAnEmptyArrayWhenGivenNull()
+    {
+        $this->assertEmpty(PubmedId::extract(null));
+    }
 }
