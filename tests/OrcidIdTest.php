@@ -27,4 +27,9 @@ class OrcidIdTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(['0000-0002-0088-0058'], OrcidId::extract('orcid.org/0000-0002-0088-0058…'));
     }
+
+    public function testReturnsEmptyArrayWhenGivenNull()
+    {
+        $this->assertEmpty(OrcidId::extract(null));
+    }
 }

@@ -112,7 +112,8 @@ Return an array of ORCID identifiers from a given string. Will return an empty a
 ```php
 use Altmetric\Identifiers\PubmedId;
 
-$pubmedIds = PubmedId::extract("23193287\n14599470");
+$pubmedIds = PubmedId::extract("23193287\n14599470\nhttps://www.ncbi.nlm.nih.gov/pubmed/123\npmid:456\ninfo:pmid/789");
+//=> ['23193287', '14599470', '123', '456', '789']
 ```
 
 Return an array of PubMed IDs from a given string. Will return an empty array if no matches are found.

@@ -47,4 +47,9 @@ class UrnTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(['urn:mutton:chops.'], Urn::extract('urn:mutton:chops.'));
     }
+
+    public function testReturnsEmptyArrayWhenGivenNull()
+    {
+        $this->assertEmpty(Urn::extract(null));
+    }
 }

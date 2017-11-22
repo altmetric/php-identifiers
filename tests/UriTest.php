@@ -47,4 +47,9 @@ class UriTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEmpty(Uri::extract('Nothing to.see here.'));
     }
+
+    public function testReturnsEmptyArrayWhenGivenNull()
+    {
+        $this->assertEmpty(Uri::extract(null));
+    }
 }
