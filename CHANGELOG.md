@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.8.0] - 2017-11-22
+### Added
+- Support extracting PubMed IDs from PubMed URLs and URIs with the pmid or info
+  scheme.
+
 ## [0.7.0] - 2017-07-01
 ### Changed
 - Extracting arXiv IDs and ISBNs no longer deduplicates identifiers by default
@@ -56,3 +61,4 @@ project adheres to [Semantic Versioning](http://semver.org/).
 [0.5.1]: https://github.com/altmetric/php-identifiers/releases/tag/v0.5.1
 [0.6.0]: https://github.com/altmetric/php-identifiers/releases/tag/v0.6.0
 [0.7.0]: https://github.com/altmetric/php-identifiers/releases/tag/v0.7.0
+[0.8.0]: https://github.com/altmetric/php-identifiers/releases/tag/v0.8.0
