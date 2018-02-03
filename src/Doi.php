@@ -38,25 +38,17 @@ EOT;
     {
         preg_match_all(self::REGEXP, mb_strtolower($str, 'UTF-8'), $matches);
 
-        return array_filter(array_map([__CLASS__, 'stripTrailingPunctuation'], $matches[0]));
+        return array_filter(array_map([__CLASS__, 'extractOne'], $matches[0]));
     }
 
     public static function extractOne($str)
     {
-        preg_match(self::REGEXP, mb_strtolower($str, 'UTF-8'), $matches);
-        if (empty($matches)) {
-            return;
+        while (preg_match(self::REGEXP, mb_strtolower($str, 'UTF-8'), $matches)) {
+            if (preg_match(self::VALID_ENDING, $matches[0])) {
+                return $matches[0];
+            }
+
+            $str = preg_replace('/\p{P}$/u', '', $matches[0]);
         }
-
-        return self::stripTrailingPunctuation($matches[0]);
-    }
-
-    private static function stripTrailingPunctuation($doi)
-    {
-        if (preg_match(self::VALID_ENDING, $doi)) {
-            return $doi;
-        }
-
-        return self::extractOne(preg_replace('/\p{P}$/u', '', $doi));
     }
 }
