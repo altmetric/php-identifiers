@@ -123,4 +123,12 @@ class DoiTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEmpty(Doi::extract(null));
     }
+
+    public function testDoesNotOverflowWhenGivenLotsOfTrailingPunctuation()
+    {
+        $this->assertEquals(
+            ['10.1130/2013.2502'],
+            Doi::extract('10.1130/2013.2502' . str_repeat('.', 10000))
+        );
+    }
 }
