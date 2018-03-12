@@ -6,13 +6,15 @@ class Isbn
     const ISBN_13_REGEXP = <<<'EOT'
 {
     \b
-    97[89]              # ISBN (GS1) Bookland prefix
-    [\p{Pd}\p{Zs}]?     # Optional hyphenation
-    (?:
-        \d              # Digit
-        [\p{Pd}\p{Zs}]? # Optional hyphenation
-    ){9}
-    \d                  # Check digit
+    (
+        97[89]              # ISBN (GS1) Bookland prefix
+        ([\p{Pd}\p{Zs}])?   # Optional hyphenation
+        (?:
+            \d              # Digit
+            \2?             # Optional hyphenation
+        ){9}
+        \d                  # Check digit
+    )
     \b
 }xu
 EOT;
@@ -23,11 +25,15 @@ EOT;
         [\p{Pd}\p{Zs}]
     )
     \b
-    (?:
-        \d              # Digit
-        [\p{Pd}\p{Zs}]? # Optional hyphenation
-    ){9}
-    [\dX]               # Check digit
+    (
+        \d                  # Digit
+        ([\p{Pd}\p{Zs}])?   # Optional hyphenation
+        (?:
+            \d              # Digit
+            \2?             # Optional hyphenation
+        ){8}
+        [\dX]               # Check digit
+    )
     \b
 }xu
 EOT;
@@ -61,22 +67,34 @@ EOT;
 
     private static function extractIsbn13s($str)
     {
-        preg_match_all(self::ISBN_13_REGEXP, $str, $matches);
+        preg_match_all(self::ISBN_13_REGEXP, $str, $matches, \PREG_SET_ORDER);
 
         return array_filter(
-            array_map([__CLASS__, 'stripHyphenation'], $matches[0]),
+            array_map(
+                [__CLASS__, 'stripHyphenation'],
+                array_filter(
+                    $matches,
+                    [__CLASS__, 'isValidIsbn13Grouping']
+                )
+            ),
             [__CLASS__, 'isValidIsbn13']
         );
     }
 
     private static function extractIsbn10s($str)
     {
-        preg_match_all(self::ISBN_10_REGEXP, $str, $matches);
+        preg_match_all(self::ISBN_10_REGEXP, $str, $matches, \PREG_SET_ORDER);
 
         return array_map(
             [__CLASS__, 'convertIsbn10ToIsbn13'],
             array_filter(
-                array_map([__CLASS__, 'stripHyphenation'], $matches[0]),
+                array_map(
+                    [__CLASS__, 'stripHyphenation'],
+                    array_filter(
+                        $matches,
+                        [__CLASS__, 'isValidIsbn10Grouping']
+                    )
+                ),
                 [__CLASS__, 'isValidIsbn10']
             )
         );
@@ -87,9 +105,30 @@ EOT;
         return str_replace(['.', '/'], '', $str);
     }
 
-    private static function stripHyphenation($str)
+    private static function isValidIsbn13Grouping($match)
     {
-        return preg_replace('/[\p{Pd}\p{Zs}]/u', '', $str);
+        if (empty($match[2])) {
+            return true;
+        }
+
+        return self::countGroups($match) === 4;
+    }
+
+    private static function isValidIsbn10Grouping($match)
+    {
+        if (empty($match[2])) {
+            return true;
+        }
+
+        return self::countGroups($match) === 3;
+    }
+
+    private static function stripHyphenation($match)
+    {
+        $str = $match[1];
+        $hyphen = isset($match[2]) ? $match[2] : '';
+
+        return str_replace($hyphen, '', $str);
     }
 
     private static function isValidIsbn13($str)
@@ -142,5 +181,12 @@ EOT;
         $checkDigit = 10 - ($sum % 10);
 
         return $checkDigit === 10 ? 0 : $checkDigit;
+    }
+
+    private static function countGroups($match)
+    {
+        list($_, $str, $hyphen) = $match;
+
+        return mb_substr_count($str, $hyphen);
     }
 }

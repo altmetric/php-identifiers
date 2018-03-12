@@ -137,4 +137,34 @@ class IsbnTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEmpty(Isbn::extract(null));
     }
+
+    public function testDoesNotExtractIsbn13sFromStringsWithInconsistentHyphenation()
+    {
+        $this->assertEmpty(Isbn::extract('978-0 80-506909 9'));
+    }
+
+    public function testDoesNotExtractIsbn10sFromStringsWithInconsistentHyphenation()
+    {
+        $this->assertEmpty(Isbn::extract('0-8050 6909-7'));
+    }
+
+    public function testDoesNotExtractIsbn13sWithMoreThanFiveGroups()
+    {
+        $this->assertEmpty(Isbn::extract('978-0-80-506-909-9'));
+    }
+
+    public function testDoesNotExtractIsbn13sWithLessThanFiveGroups()
+    {
+        $this->assertEmpty(Isbn::extract('978-0-80506909-9'));
+    }
+
+    public function testDoesNotExtractIsbn10sWithMoreThanFourGroups()
+    {
+        $this->assertEmpty(Isbn::extract('0-8050-69-09-7'));
+    }
+
+    public function testDoesNotExtractIsbn10sWithLessThanFourGroups()
+    {
+        $this->assertEmpty(Isbn::extract('0-80506909-7'));
+    }
 }
