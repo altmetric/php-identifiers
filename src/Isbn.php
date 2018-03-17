@@ -57,47 +57,49 @@ EOT;
     {
         preg_match_all(self::ISBN_A_REGEXP, $str, $matches);
 
-        return self::extractIsbn13s(
-            implode(
-                PHP_EOL,
-                array_map([__CLASS__, 'convertIsbnAToIsbn13'], $matches[0])
-            )
-        );
+        $isbns = [];
+
+        foreach ($matches[0] as $match) {
+            $isbns[] = self::convertIsbnAToIsbn13($match);
+        }
+
+        return self::extractIsbn13s(implode(PHP_EOL, $isbns));
     }
 
     private static function extractIsbn13s($str)
     {
         preg_match_all(self::ISBN_13_REGEXP, $str, $matches, \PREG_SET_ORDER);
 
-        return array_filter(
-            array_map(
-                [__CLASS__, 'stripHyphenation'],
-                array_filter(
-                    $matches,
-                    [__CLASS__, 'isValidIsbn13Grouping']
-                )
-            ),
-            [__CLASS__, 'isValidIsbn13']
-        );
+        $isbns = [];
+
+        foreach ($matches as $match) {
+            $isbn = self::stripHyphenation($match, 4);
+            if (!self::isValidIsbn13($isbn)) {
+                continue;
+            }
+
+            $isbns[] = $isbn;
+        }
+
+        return $isbns;
     }
 
     private static function extractIsbn10s($str)
     {
         preg_match_all(self::ISBN_10_REGEXP, $str, $matches, \PREG_SET_ORDER);
 
-        return array_map(
-            [__CLASS__, 'convertIsbn10ToIsbn13'],
-            array_filter(
-                array_map(
-                    [__CLASS__, 'stripHyphenation'],
-                    array_filter(
-                        $matches,
-                        [__CLASS__, 'isValidIsbn10Grouping']
-                    )
-                ),
-                [__CLASS__, 'isValidIsbn10']
-            )
-        );
+        $isbns = [];
+
+        foreach ($matches as $match) {
+            $isbn = self::stripHyphenation($match, 3);
+            if (!self::isValidIsbn10($isbn)) {
+                continue;
+            }
+
+            $isbns[] = self::convertIsbn10ToIsbn13($isbn);
+        }
+
+        return $isbns;
     }
 
     private static function convertIsbnAToIsbn13($str)
@@ -105,34 +107,28 @@ EOT;
         return str_replace(['.', '/'], '', $str);
     }
 
-    private static function isValidIsbn13Grouping($match)
+    private static function stripHyphenation($match, $limit)
     {
-        if (empty($match[2])) {
-            return true;
+        $isbn = $match[1];
+        $hyphen = isset($match[2]) ? $match[2] : null;
+
+        if ($hyphen) {
+            if (mb_substr_count($isbn, $hyphen, 'UTF-8') !== $limit) {
+                return;
+            }
+
+            return str_replace($hyphen, '', $isbn);
         }
 
-        return self::countGroups($match) === 4;
-    }
-
-    private static function isValidIsbn10Grouping($match)
-    {
-        if (empty($match[2])) {
-            return true;
-        }
-
-        return self::countGroups($match) === 3;
-    }
-
-    private static function stripHyphenation($match)
-    {
-        $str = $match[1];
-        $hyphen = isset($match[2]) ? $match[2] : '';
-
-        return str_replace($hyphen, '', $str);
+        return $isbn;
     }
 
     private static function isValidIsbn13($str)
     {
+        if (strlen($str) !== 13) {
+            return false;
+        }
+
         $checkDigit = self::isbn13CheckDigit($str);
 
         return $checkDigit === (int) $str[12];
@@ -140,6 +136,10 @@ EOT;
 
     private static function isValidIsbn10($str)
     {
+        if (strlen($str) !== 10) {
+            return false;
+        }
+
         $sum = $str[0];
         $sum += $str[1] * 2;
         $sum += $str[2] * 3;
@@ -181,12 +181,5 @@ EOT;
         $checkDigit = 10 - ($sum % 10);
 
         return $checkDigit === 10 ? 0 : $checkDigit;
-    }
-
-    private static function countGroups($match)
-    {
-        list($_, $str, $hyphen) = $match;
-
-        return mb_substr_count($str, $hyphen);
     }
 }
