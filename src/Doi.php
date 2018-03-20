@@ -5,6 +5,7 @@ class Doi
 {
     const REGEXP = <<<'EOT'
 {
+    \b
     10                      # Directory indicator (always 10)
     \.
     (?:

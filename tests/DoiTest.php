@@ -131,4 +131,9 @@ class DoiTest extends \PHPUnit_Framework_TestCase
             Doi::extract('10.1130/2013.2502' . str_repeat('.', 10000))
         );
     }
+
+    public function testDoesNotExtractDoisWithExtraDigitsPrefixed()
+    {
+        $this->assertEmpty(Doi::extract('110.1234/foo'));
+    }
 }
