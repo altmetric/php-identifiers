@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.10.0] - 2018-04-06
+### Changed
+- Stricter ISBN extraction by demanding consistent hyphenation and the correct
+  number of groups
+
 ## [0.9.0] - 2018-04-06
 ### Added
 - Added support for extracting more old Wiley DOIs
@@ -70,3 +75,4 @@ project adheres to [Semantic Versioning](http://semver.org/).
 [0.7.0]: https://github.com/altmetric/php-identifiers/releases/tag/v0.7.0
 [0.8.0]: https://github.com/altmetric/php-identifiers/releases/tag/v0.8.0
 [0.9.0]: https://github.com/altmetric/php-identifiers/releases/tag/v0.9.0
+[0.10.0]: https://github.com/altmetric/php-identifiers/releases/tag/v0.10.0
