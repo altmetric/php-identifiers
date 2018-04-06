@@ -2,10 +2,17 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.9.0] - 2018-04-06
+### Added
+- Added support for extracting more old Wiley DOIs
+
+### Changed
+- Performance improvements when extracting DOIs with trailing punctuation
+
 ## [0.8.0] - 2017-11-22
 ### Added
 - Support extracting PubMed IDs from PubMed URLs and URIs with the pmid or info
-  scheme.
+  scheme
 
 ## [0.7.0] - 2017-07-01
 ### Changed
@@ -62,3 +69,4 @@ project adheres to [Semantic Versioning](http://semver.org/).
 [0.6.0]: https://github.com/altmetric/php-identifiers/releases/tag/v0.6.0
 [0.7.0]: https://github.com/altmetric/php-identifiers/releases/tag/v0.7.0
 [0.8.0]: https://github.com/altmetric/php-identifiers/releases/tag/v0.8.0
+[0.9.0]: https://github.com/altmetric/php-identifiers/releases/tag/v0.9.0
