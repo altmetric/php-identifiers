@@ -61,8 +61,8 @@ class DoiTest extends \PHPUnit_Framework_TestCase
     public function testExtractsOldWileyDois()
     {
         $this->assertEquals(
-            ['10.1002/(sici)1096-8644(199601)99:1<135::aid-ajpa8>3.0.co;2-#'],
-            Doi::extract('This is an example of an old Wiley DOI: 10.1002/(SICI)1096-8644(199601)99:1<135::AID-AJPA8>3.0.CO;2-#')
+            ['10.1002/(sici)1096-8644(199601)99:1<135::aid-ajpa8>3.0.co;2-#', '10.1002/(sici)1099-0690(199806)1998:6<1071::aid-ejoc1071>3.0.co;2-5'],
+            Doi::extract('This is an example of an old Wiley DOI: 10.1002/(SICI)1096-8644(199601)99:1<135::AID-AJPA8>3.0.CO;2-# 10.1002/(sici)1099-0690(199806)1998:6<1071::aid-ejoc1071>3.0.co;2-5')
         );
     }
 
@@ -135,5 +135,41 @@ class DoiTest extends \PHPUnit_Framework_TestCase
     public function testDoesNotExtractDoisWithExtraDigitsPrefixed()
     {
         $this->assertEmpty(Doi::extract('110.1234/foo'));
+    }
+
+    public function testExtractsDoisWithTrailingClosingParentheses()
+    {
+        $this->assertEquals(
+            ['10.1130/2013.2502(04)'],
+            Doi::extract('10.1130/2013.2502(04))')
+        );
+    }
+
+    public function testExtractsDoisWithMultipleTrailingClosingParentheses()
+    {
+        $this->assertEquals(
+            ['10.1130/2013.2502(04)'],
+            Doi::extract('10.1130/2013.2502(04))))')
+        );
+    }
+
+    public function testExtractsDoisWithParenthesesWithinTheSuffix()
+    {
+        $this->assertEquals(
+            ['10.1016/0005-2744(70)90072-0'],
+            Doi::extract('10.1016/0005-2744(70)90072-0')
+        );
+    }
+
+    public function testExtractsDoisFromCrossrefSample()
+    {
+        foreach (file(__DIR__ . '/fixtures/dois.txt') as $line) {
+            $doi = chop($line);
+
+            $this->assertEquals(
+                [$doi],
+                Doi::extract($doi)
+            );
+        }
     }
 }
