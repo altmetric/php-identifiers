@@ -26,12 +26,12 @@ EOT;
     )
     \b
     (
-        \d                  # Digit
+        \d{1,5}             # Registration group identifier
         ([\p{Pd}\p{Zs}])?   # Optional hyphenation
         (?:
             \d              # Digit
             \2?             # Optional hyphenation
-        ){8}
+        ){4,8}
         [\dX]               # Check digit
     )
     \b

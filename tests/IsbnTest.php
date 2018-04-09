@@ -167,4 +167,12 @@ class IsbnTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEmpty(Isbn::extract('0-80506909-7'));
     }
+
+    public function testExtractsIsbn10sWithVariableWidthRegistrationGroupIdentifiers()
+    {
+        $this->assertEquals(
+            ['9789992158104', '9789971502102', '9789604250592', '9788090273412'],
+            Isbn::extract('99921-58-10-7 9971-5-0210-0 960-425-059-0 80-902734-1-6')
+        );
+    }
 }
