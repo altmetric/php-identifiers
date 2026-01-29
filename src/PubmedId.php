@@ -38,8 +38,10 @@ EOT;
 }xu
 EOT;
 
-    public static function extract($str)
+    public static function extract(?string $str): array
     {
+        $str = $str ?? '';
+
         return array_merge(self::extractPubmedIds($str), self::extractPubmedUris($str));
     }
 

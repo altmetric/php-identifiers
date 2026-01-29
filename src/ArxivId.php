@@ -29,8 +29,10 @@ EOT;
 }xiu
 EOT;
 
-    public static function extract($str)
+    public static function extract(?string $str): array
     {
+        $str = $str ?? '';
+
         return array_merge(self::extractPre2007ArxivIds($str), self::extractPost2007ArxivIds($str));
     }
 

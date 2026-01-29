@@ -1,10 +1,10 @@
-# Identifiers [![Build Status](https://travis-ci.org/altmetric/php-identifiers.svg?branch=master)](https://travis-ci.org/altmetric/php-identifiers)
+# Identifiers [![Tests](https://github.com/altmetric/php-identifiers/actions/workflows/tests.yml/badge.svg)](https://github.com/altmetric/php-identifiers/actions/workflows/tests.yml)
 
 Collection of utilities related to the extraction, validation and normalization
 of various scholarly identifiers.
 
-**Current version:** 0.10.1  
-**Supported PHP versions:** 5.4, 5.5, 5.6, 7
+**Current version:** 1.0.0
+**Supported PHP versions:** 7.2+
 
 ## Installation
 
@@ -161,6 +161,6 @@ We also maintain [a version of this library for Ruby](https://github.com/altmetr
 
 ## License
 
-Copyright © 2016-2017 Altmetric LLP
+Copyright © 2016-2026 Altmetric LLP
 
 Distributed under the [MIT License](http://opensource.org/licenses/MIT).

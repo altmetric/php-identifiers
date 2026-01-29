@@ -1,7 +1,7 @@
 <?php
 namespace Altmetric\Identifiers;
 
-class UrnTest extends \PHPUnit_Framework_TestCase
+class UrnTest extends \PHPUnit\Framework\TestCase
 {
     public function testExtractsValidUrns()
     {

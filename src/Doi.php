@@ -32,8 +32,9 @@ class Doi
 }xu
 EOT;
 
-    public static function extract($str)
+    public static function extract(?string $str): array
     {
+        $str = $str ?? '';
         preg_match_all(self::REGEXP, mb_strtolower($str, 'UTF-8'), $matches);
 
         return $matches[0];

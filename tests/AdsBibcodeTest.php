@@ -1,7 +1,7 @@
 <?php
 namespace Altmetric\Identifiers;
 
-class AdsBibcodeTest extends \PHPUnit_Framework_TestCase
+class AdsBibcodeTest extends \PHPUnit\Framework\TestCase
 {
     public function testExtractsBibcodes()
     {

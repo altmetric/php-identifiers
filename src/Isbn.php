@@ -48,8 +48,10 @@ EOT;
 }xu
 EOT;
 
-    public static function extract($str)
+    public static function extract(?string $str): array
     {
+        $str = $str ?? '';
+
         return array_merge(self::extractIsbnAs($str), self::extractIsbn13s($str), self::extractIsbn10s($str));
     }
 
@@ -123,9 +125,9 @@ EOT;
         return $isbn;
     }
 
-    private static function isValidIsbn13($str)
+    private static function isValidIsbn13(?string $str): bool
     {
-        if (strlen($str) !== 13) {
+        if ($str === null || strlen($str) !== 13) {
             return false;
         }
 
@@ -134,9 +136,9 @@ EOT;
         return $checkDigit === (int) $str[12];
     }
 
-    private static function isValidIsbn10($str)
+    private static function isValidIsbn10(?string $str): bool
     {
-        if (strlen($str) !== 10) {
+        if ($str === null || strlen($str) !== 10) {
             return false;
         }
 
