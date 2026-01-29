@@ -1,7 +1,7 @@
 <?php
 namespace Altmetric\Identifiers;
 
-class PubmedIdTest extends \PHPUnit_Framework_TestCase
+class PubmedIdTest extends \PHPUnit\Framework\TestCase
 {
     public function testExtractsPubmedIDs()
     {

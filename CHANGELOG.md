@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## [CURRENT]
+### Changed
+- Minimum PHP version is now 7.2 (previously 5.4)
+
+### Security
+- Upgrade PHPUnit to 8.5.52 to fix unsafe deserialization vulnerability
+
 ## [0.10.1] - 2018-04-09
 ### Fixed
 - Restored support for extracting hyphenated ISBN-10s with registration group

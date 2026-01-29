@@ -1,7 +1,7 @@
 <?php
 namespace Altmetric\Identifiers;
 
-class ArxivIdTest extends \PHPUnit_Framework_TestCase
+class ArxivIdTest extends \PHPUnit\Framework\TestCase
 {
     public function testExtractsPre2007ArxivIds()
     {

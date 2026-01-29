@@ -1,7 +1,7 @@
 <?php
 namespace Altmetric\Identifiers;
 
-class DoiTest extends \PHPUnit_Framework_TestCase
+class DoiTest extends \PHPUnit\Framework\TestCase
 {
     public function testExtractsDois()
     {

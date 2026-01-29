@@ -1,7 +1,7 @@
 <?php
 namespace Altmetric\Identifiers;
 
-class IsbnTest extends \PHPUnit_Framework_TestCase
+class IsbnTest extends \PHPUnit\Framework\TestCase
 {
     public function testExtractsIsbn13s()
     {

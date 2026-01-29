@@ -1,7 +1,7 @@
 <?php
 namespace Altmetric\Identifiers;
 
-class RepecIdTest extends \PHPUnit_Framework_TestCase
+class RepecIdTest extends \PHPUnit\Framework\TestCase
 {
     public function testExtractsRepecIds()
     {

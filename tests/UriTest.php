@@ -1,7 +1,7 @@
 <?php
 namespace Altmetric\Identifiers;
 
-class UriTest extends \PHPUnit_Framework_TestCase
+class UriTest extends \PHPUnit\Framework\TestCase
 {
     public function testExtractsValidUris()
     {
