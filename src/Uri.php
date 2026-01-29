@@ -52,8 +52,9 @@ class Uri
 #x
 EOF;
 
-    public static function extract($str)
+    public static function extract(?string $str): array
     {
+        $str = $str ?? '';
         preg_match_all(self::REGEXP, $str, $matches);
 
         return $matches[0];

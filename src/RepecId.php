@@ -3,8 +3,9 @@ namespace Altmetric\Identifiers;
 
 class RepecId
 {
-    public static function extract($str)
+    public static function extract(?string $str): array
     {
+        $str = $str ?? '';
         preg_match_all('/\brepec:\S+\b/ui', $str, $matches);
 
         return array_map(

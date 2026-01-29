@@ -4,8 +4,9 @@ namespace Altmetric\Identifiers;
 
 class OrcidId
 {
-    public static function extract($str)
+    public static function extract(?string $str): array
     {
+        $str = $str ?? '';
         preg_match_all('/\d{4}-\d{4}-\d{4}-\d{3}[\dX]/i', $str, $matches);
 
         return array_filter(array_map('strtoupper', $matches[0]), [__CLASS__, 'isValid']);
