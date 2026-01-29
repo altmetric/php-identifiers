@@ -5,6 +5,7 @@ project adheres to [Semantic Versioning](http://semver.org/).
 ## [CURRENT]
 ### Changed
 - Minimum PHP version is now 7.2 (previously 5.4)
+- Migrate CI from Travis to GitHub Actions
 
 ### Security
 - Upgrade PHPUnit to 8.5.52 to fix unsafe deserialization vulnerability
