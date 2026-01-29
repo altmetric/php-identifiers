@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
-## [CURRENT]
+## [1.0.0] - 2026-01-29
 ### Changed
 - Minimum PHP version is now 7.2 (previously 5.4)
 - Migrate CI from Travis to GitHub Actions
@@ -90,4 +90,5 @@ project adheres to [Semantic Versioning](http://semver.org/).
 [0.8.0]: https://github.com/altmetric/php-identifiers/releases/tag/v0.8.0
 [0.9.0]: https://github.com/altmetric/php-identifiers/releases/tag/v0.9.0
 [0.10.0]: https://github.com/altmetric/php-identifiers/releases/tag/v0.10.0
+[1.0.0]: https://github.com/altmetric/php-identifiers/releases/tag/v1.0.0
 [0.10.1]: https://github.com/altmetric/php-identifiers/releases/tag/v0.10.1
